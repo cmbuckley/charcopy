@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="CharCopy">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+</head>
+<body>
+    <div><p>U+<input id="input"></p></div>
+    <div style="text-align: center; border: 1px solid black; width: 3em; height: 3em"><p id="output"></p></div>
+<script>
+document.querySelector('#input').addEventListener('keyup', function (e) {
+    document.querySelector('#output').innerHTML = (e.target.value ? '&#x' + e.target.value + ';' : '');
+});
+</script>
+</body>
+</html>
