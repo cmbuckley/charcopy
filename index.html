@@ -6,10 +6,18 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-title" content="CharCopy">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <style>
+        .output {
+            text-align: center;
+            border: 1px solid black;
+            width: 3em;
+            height: 3em;
+        }
+    </style>
 </head>
 <body>
     <div><p>U+<input id="input"></p></div>
-    <div style="text-align: center; border: 1px solid black; width: 3em; height: 3em"><p id="output"></p></div>
+    <div class="output"><p id="output"></p></div>
 <script>
 document.querySelector('#input').addEventListener('keyup', function (e) {
     document.querySelector('#output').innerHTML = (e.target.value ? '&#x' + e.target.value + ';' : '');
