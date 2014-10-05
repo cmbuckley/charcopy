@@ -7,21 +7,57 @@
     <meta name="apple-mobile-web-app-title" content="CharCopy">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <style>
-        .output {
-            text-align: center;
-            border: 1px solid black;
-            width: 3em;
-            height: 3em;
-        }
+    .input {
+        text-align: center;
+    }
+
+    #input {
+        text-transform: uppercase;
+    }
+
+    .output {
+        margin: 2em auto;
+        text-align: center;
+        border: 4px solid black;
+        border-radius: 5px;
+        width: 150px;
+        height: 150px;
+        line-height: 150px;
+    }
+
+    .output p {
+        font-size: 100px;
+        margin: 0;
+    }
     </style>
 </head>
 <body>
-    <div><p>U+<input id="input"></p></div>
+    <form autocorrect="off" autocapitalize="off">
+    <div class="input"><p>U+<input id="input"></p></div>
+    </form>
     <div class="output"><p id="output"></p></div>
-<script>
-document.querySelector('#input').addEventListener('keyup', function (e) {
-    document.querySelector('#output').innerHTML = (e.target.value ? '&#x' + e.target.value + ';' : '');
-});
-</script>
+    <ul>
+        <li class="quick" data-val="2060">U+2060 WORD JOINER</li>
+    </ul>
+    <script>
+    function output(val) {
+        document.querySelector('#output').innerHTML = (val ? '&#x' + val + ';' : '');
+    }
+
+    document.querySelector('#input').addEventListener('keyup', function (e) {
+        output(e.target.value);
+    });
+
+    document.querySelector('form').addEventListener('submit', function (e) {
+        e.preventDefault();
+        document.querySelector('#input').blur();
+    });
+
+    Array.prototype.forEach.call(document.querySelectorAll('.quick'), function (quick) {
+        quick.addEventListener('click', function (e) {
+            output(e.target.getAttribute('data-val'));
+        });
+    });
+    </script>
 </body>
 </html>
