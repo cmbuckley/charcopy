@@ -40,9 +40,17 @@
         <li class="quick" data-val="2060">U+2060 WORD JOINER</li>
         <li class="quick" data-val="2192">U+2192 RIGHTWARDS ARROW</li>
     </ul>
+    <div class="input">Character: <input id="char" /></div>
+    <div><p id="char-code"></p></div>
+    <script src="https://rawgit.com/mathiasbynens/String.prototype.codePointAt/master/codepointat.js"></script>
     <script>
     function output(val) {
         document.querySelector('#output').innerHTML = (val ? '&#x' + val + ';' : '');
+    }
+
+    function codePoint(val) {
+        var code = (val ? 'U+' + val.codePointAt(0).toString(16).toUpperCase() : '');
+        document.querySelector('#char-code').innerHTML = code;
     }
 
     document.querySelector('#input').addEventListener('keyup', function (e) {
@@ -52,6 +60,14 @@
     document.querySelector('form').addEventListener('submit', function (e) {
         e.preventDefault();
         document.querySelector('#input').blur();
+    });
+
+    document.querySelector('#char').addEventListener('keyup', function (e) {
+        codePoint(e.target.value);
+    });
+
+    document.querySelector('#char').addEventListener('paste', function (e) {
+        codePoint(e.clipboardData.getData('text/plain'));
     });
 
     Array.prototype.forEach.call(document.querySelectorAll('.quick'), function (quick) {
