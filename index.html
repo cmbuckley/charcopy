@@ -49,8 +49,17 @@
     }
 
     function codePoint(val) {
-        var code = (val ? 'U+' + val.codePointAt(0).toString(16).toUpperCase() : '');
-        document.querySelector('#char-code').innerHTML = code;
+        var out = '';
+
+        val.split(/([\uD800-\uDBFF][\uDC00-\uDFFF])/).forEach(function (char) {
+            if (char.codePointAt(0) > 126900) {
+                out += '<img src="http://www.unicode.org/reports/tr51/images/apple/apple_' + char.codePointAt(0).toString(16) + '.png" width="18" />';
+            }
+            else {
+                out += char;
+            }
+        });
+        document.querySelector('#char-code').innerHTML = out;
     }
 
     document.querySelector('#input').addEventListener('keyup', function (e) {
