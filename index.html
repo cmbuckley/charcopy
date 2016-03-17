@@ -29,6 +29,12 @@
         font-size: 100px;
         margin: 0;
     }
+
+    .emoji {
+        width: 20px;
+        height: 20px;
+        vertical-align: top;
+    }
     </style>
 </head>
 <body>
@@ -52,13 +58,16 @@
         var out = '';
 
         val.split(/([\uD800-\uDBFF][\uDC00-\uDFFF])/).forEach(function (char) {
-            if (char.codePointAt(0) > 126900) {
-                out += '<img src="http://www.unicode.org/reports/tr51/images/apple/apple_' + char.codePointAt(0).toString(16) + '.png" width="18" />';
+            var codePoint = char.codePointAt(0);
+
+            if (codePoint >= 126980 || (codePoint >= 9728 && codePoint < 9983)) {
+                out += '<img alt="' + char + '" src="http://www.unicode.org/reports/tr51/images/apple/apple_' + codePoint.toString(16) + '.png" class="emoji" />';
             }
             else {
                 out += char;
             }
         });
+
         document.querySelector('#char-code').innerHTML = out;
     }
 
