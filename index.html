@@ -53,7 +53,7 @@
     <script src="https://rawgit.com/mathiasbynens/String.prototype.codePointAt/master/codepointat.js"></script>
     <script>
     function output(val) {
-        document.querySelector('#output').innerHTML = (val ? '&#x' + val + ';' : '');
+        document.getElementById('output').innerHTML = (val ? '&#x' + val + ';' : '');
     }
 
     function codePoint(val) {
@@ -70,23 +70,23 @@
             }
         });
 
-        document.querySelector('#char-code').innerHTML = out;
+        document.getElementById('char-code').innerHTML = out;
     }
 
-    document.querySelector('#input').addEventListener('keyup', function (e) {
+    document.getElementById('input').addEventListener('keyup', function (e) {
         output(e.target.value);
     });
 
     document.querySelector('form').addEventListener('submit', function (e) {
         e.preventDefault();
-        document.querySelector('#input').blur();
+        document.getElementById('input').blur();
     });
 
-    document.querySelector('#char').addEventListener('keyup', function (e) {
+    document.getElementById('char').addEventListener('keyup', function (e) {
         codePoint(e.target.value);
     });
 
-    document.querySelector('#char').addEventListener('paste', function (e) {
+    document.getElementById('char').addEventListener('paste', function (e) {
         codePoint(e.clipboardData.getData('text/plain'));
     });
 
