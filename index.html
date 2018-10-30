@@ -11,12 +11,17 @@
         text-align: center;
     }
 
+    .clipboard {
+        display: block;
+        margin: 0 auto;
+    }
+
     #input {
         text-transform: uppercase;
     }
 
     .output {
-        margin: 2em auto;
+        margin: 2em auto 10px;
         text-align: center;
         border: 4px solid black;
         border-radius: 5px;
@@ -42,6 +47,7 @@
     <div class="input"><p>U+<input id="input"></p></div>
     </form>
     <div class="output"><p id="output"></p></div>
+    <button class="clipboard" data-clipboard-target="#output">Copy</button>
     <ul class="quick">
         <li data-val="2009">U+2009 THIN SPACE</li>
         <li data-val="200A">U+200A HAIR SPACE</li>
@@ -51,6 +57,7 @@
     <div class="input">Character: <input id="char" /></div>
     <div><p id="char-code"></p></div>
     <script src="https://rawgit.com/mathiasbynens/String.prototype.codePointAt/master/codepointat.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
     <script>
     function output(val) {
         document.getElementById('output').innerHTML = (val ? '&#x' + val + ';' : '');
@@ -94,6 +101,10 @@
         if (e.target && e.target.matches('li')) {
             output(e.target.getAttribute('data-val'));
         }
+    });
+
+    (new ClipboardJS('.clipboard')).on('success', function(e) {
+        e.clearSelection();
     });
     </script>
 </body>
