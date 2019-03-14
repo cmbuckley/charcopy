@@ -3,58 +3,62 @@ layout: showcase
 title: charcopy
 ---
 <style>
-    .input {
+    .charcopy-input {
         text-align: center;
     }
 
-    .clipboard {
+    .charcopy-input input {
+        width: 150px;
+    }
+
+    .charcopy-clipboard {
         display: block;
         margin: 0 auto;
     }
 
-    #input {
+    #charcopy-codepoint {
         text-transform: uppercase;
     }
 
-    .output {
+    .charcopy-output {
         margin: 2em auto 10px;
         text-align: center;
-        border: 4px solid black;
+        border: 4px solid #2C8654;
         border-radius: 5px;
         width: 150px;
         height: 150px;
         line-height: 150px;
     }
 
-    .output p {
+    .charcopy-output p {
         font-size: 100px;
         margin: 0;
     }
 
-    .emoji {
+    .charcopy-emoji {
         width: 20px;
         height: 20px;
         vertical-align: top;
     }
 </style>
 <form autocorrect="off" autocapitalize="off">
-    <div class="input"><p>U+<input id="input"></p></div>
+    <div class="charcopy-input"><p>U+<input type="text" id="charcopy-codepoint"></p></div>
 </form>
-<div class="output"><p id="output"></p></div>
-<button class="clipboard" data-clipboard-target="#output">Copy</button>
-<ul class="quick">
+<div class="charcopy-output"><p id="charcopy-character"></p></div>
+<button class="button charcopy-clipboard" data-clipboard-target="#charcopy-character">Copy</button>
+<ul class="charcopy-quick">
     <li data-val="2009">U+2009 THIN SPACE</li>
     <li data-val="200A">U+200A HAIR SPACE</li>
     <li data-val="2060">U+2060 WORD JOINER</li>
     <li data-val="2192">U+2192 RIGHTWARDS ARROW</li>
 </ul>
-<div class="input">Character: <input id="char" /></div>
-<div><p id="char-code"></p></div>
+<div class="charcopy-input">Character: <input type="text" id="charcopy-char" /></div>
+<div><p id="charcopy-code"></p></div>
 <script src="https://rawgit.com/mathiasbynens/String.prototype.codePointAt/master/codepointat.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
 <script>
 function output(val) {
-    document.getElementById('output').innerHTML = (val ? '&#x' + val + ';' : '');
+    document.getElementById('charcopy-character').innerHTML = (val ? '&#x' + val + ';' : '');
 }
 
 function codePoint(val) {
@@ -71,33 +75,33 @@ function codePoint(val) {
         }
     });
 
-    document.getElementById('char-code').innerHTML = out;
+    document.getElementById('charcopy-code').innerHTML = out;
 }
 
-document.getElementById('input').addEventListener('keyup', function (e) {
+document.getElementById('charcopy-codepoint').addEventListener('keyup', function (e) {
     output(e.target.value);
 });
 
 document.querySelector('form').addEventListener('submit', function (e) {
     e.preventDefault();
-    document.getElementById('input').blur();
+    document.getElementById('charcopy-input').blur();
 });
 
-document.getElementById('char').addEventListener('keyup', function (e) {
+document.getElementById('charcopy-char').addEventListener('keyup', function (e) {
     codePoint(e.target.value);
 });
 
-document.getElementById('char').addEventListener('paste', function (e) {
+document.getElementById('charcopy-char').addEventListener('paste', function (e) {
     codePoint(e.clipboardData.getData('text/plain'));
 });
 
-document.querySelector('.quick').addEventListener('click', function (e) {
+document.querySelector('.charcopy-quick').addEventListener('click', function (e) {
     if (e.target && e.target.matches('li')) {
         output(e.target.getAttribute('data-val'));
     }
 });
 
-(new ClipboardJS('.clipboard')).on('success', function(e) {
+(new ClipboardJS('.charcopy-clipboard')).on('success', function(e) {
     e.clearSelection();
 });
 </script>
