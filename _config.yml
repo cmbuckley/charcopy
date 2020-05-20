@@ -4,7 +4,12 @@ description: Copy commonly used Unicode characters using a mobile device.
 url: https://cmbuckley.co.uk
 baseurl: /charcopy
 
+repository: cmbuckley/charcopy
 remote_theme: "cmbuckley/cmbuckley.github.io"
+
+plugins:
+  - jekyll-github-metadata
+  - jekyll-remote-theme
 
 markdown: kramdown
 highlighter: rouge
@@ -31,4 +36,3 @@ social:
    facebook:  cmbuckley
    instagram: c.m.buckley
    amazon:    https://bux.re/amzn
-   google:    https://bux.re/+
