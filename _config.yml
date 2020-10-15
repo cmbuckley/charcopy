@@ -14,20 +14,6 @@ plugins:
 markdown: kramdown
 highlighter: rouge
 
-navigation:
- - title: Home
-   url: /
- - title: CV
-   url: /cv/
- - title: Contact
-   url: /contact/
- - title: Blog
-   url: /blog/
- - title: Interests
-   url: /interests/
- - title: Projects
-   url: /projects/
-
 social:
    keybase:   cmbuckley
    hackerone: cmbuckley
