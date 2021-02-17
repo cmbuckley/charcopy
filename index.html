@@ -36,9 +36,8 @@ title: charcopy
     }
 
     .charcopy-emoji {
-        width: 20px;
-        height: 20px;
-        vertical-align: top;
+        width: 1em;
+        vertical-align: text-top;
     }
 </style>
 <form autocorrect="off" autocapitalize="off">
@@ -61,20 +60,15 @@ function output(val) {
 }
 
 function codePoint(val) {
-    var out = '';
-
-    val.split(/([\uD800-\uDBFF][\uDC00-\uDFFF])/).forEach(function (char) {
+    document.getElementById('charcopy-code').innerHTML = [...val].map(function (char) {
         var codePoint = char.codePointAt(0);
 
         if (codePoint >= 126980 || (codePoint >= 9728 && codePoint < 9983)) {
-            out += '<img alt="' + char + '" src="http://www.unicode.org/reports/tr51/images/apple/apple_' + codePoint.toString(16) + '.png" class="emoji" />';
+            return '<a href="https://emojipedia.org/' + char + '/"><img class="charcopy-emoji" alt="' + char + '" src="https://www.unicode.org/reports/tr51/images/apple/apple_' + codePoint.toString(16) + '.png" class="emoji" /></a>';
         }
-        else {
-            out += char;
-        }
-    });
 
-    document.getElementById('charcopy-code').innerHTML = out;
+        return '<a href="https://www.fileformat.info/info/unicode/char/' + codePoint.toString(16) + '/index.htm">' + char + '</a>';
+    }).join('\u2009');
 }
 
 document.getElementById('charcopy-codepoint').addEventListener('keyup', function (e) {
