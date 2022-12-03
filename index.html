@@ -64,7 +64,15 @@ function codePoint(val) {
         var codePoint = char.codePointAt(0);
 
         if (codePoint >= 126980 || (codePoint >= 9728 && codePoint < 9983)) {
-            return '<a href="https://emojipedia.org/' + char + '/"><img class="charcopy-emoji" alt="' + char + '" src="https://www.unicode.org/reports/tr51/images/apple/apple_' + codePoint.toString(16) + '.png" class="emoji" /></a>';
+            if (codePoint == 9792 || codePoint == 9794) {
+                return '<a href="https://emojipedia.org/' + char + '/">' + char + '</a>';
+            }
+
+            return '<a href="https://emojipedia.org/' + char + '/"><img class="charcopy-emoji" alt="' + char + '" src="https://raw.githubusercontent.com/cj1128/emoji-images/master/imgs/' + codePoint.toString(16) + '.png" /></a>';
+        }
+
+        if (codePoint == 8205) {
+          return '<a href="https://emojipedia.org/zero-width-joiner/"><img class="charcopy-emoji" alt="Zero-width joiner" src="https://www.unicode.org/reports/tr51/images/ZWJ.png" /></a>';
         }
 
         return '<a href="https://www.fileformat.info/info/unicode/char/' + codePoint.toString(16) + '/index.htm">' + char + '</a>';
@@ -80,12 +88,8 @@ document.querySelector('form').addEventListener('submit', function (e) {
     document.getElementById('charcopy-input').blur();
 });
 
-document.getElementById('charcopy-char').addEventListener('keyup', function (e) {
+document.getElementById('charcopy-char').addEventListener('input', function (e) {
     codePoint(e.target.value);
-});
-
-document.getElementById('charcopy-char').addEventListener('paste', function (e) {
-    codePoint(e.clipboardData.getData('text/plain'));
 });
 
 document.querySelector('.charcopy-quick').addEventListener('click', function (e) {
