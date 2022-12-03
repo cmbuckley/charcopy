@@ -1,0 +1,8 @@
+2009:
+  text: THIN SPACE
+  ws: true
+200A:
+  text: HAIR SPACE
+  ws: true
+2060: WORD JOINER
+2192: RIGHTWARDS ARROW
