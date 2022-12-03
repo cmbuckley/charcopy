@@ -117,8 +117,8 @@ document.getElementById('charcopy-char').addEventListener('input', function (e) 
 });
 
 document.querySelector('.charcopy-quick').addEventListener('click', function (e) {
-    if (e.target && e.target.matches('li')) {
-        output(e.target.getAttribute('data-val'));
+    if (e.target && e.target.closest('li')) {
+        output(e.target.closest('li').dataset.val);
     }
 });
 
