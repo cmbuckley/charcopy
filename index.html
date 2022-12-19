@@ -61,6 +61,19 @@ title: charcopy
       padding-top: 2px;
       font-size: 50%;
     }
+
+    .charcopy-zwj {
+      display: inline-block;
+      width: 27px;
+      padding: 4px;
+      font-size: 0.6rem;
+      border-radius: 4px;
+      font-family: sans-serif;
+      overflow-wrap: anywhere;
+      text-align: center;
+      line-height: 88%;
+      background: var(--color-mark);
+    }
 </style>
 <form autocorrect="off" autocapitalize="off">
     <div class="charcopy-input"><p>U+<input type="text" id="charcopy-codepoint"></p></div>
@@ -96,7 +109,7 @@ function codePoint(val) {
         }
 
         if (codePoint == 8205) {
-          return '<a href="https://emojipedia.org/zero-width-joiner/"><img class="charcopy-emoji" alt="Zero-width joiner" src="https://www.unicode.org/reports/tr51/images/ZWJ.png" /></a>';
+          return '<a href="https://emojipedia.org/zero-width-joiner/"><span class="charcopy-zwj">ZWJ</span></a>';
         }
 
         return '<a href="https://www.fileformat.info/info/unicode/char/' + codePoint.toString(16) + '/index.htm">' + char + '</a>';
