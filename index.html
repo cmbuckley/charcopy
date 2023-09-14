@@ -82,7 +82,7 @@ title: charcopy
 <button class="button charcopy-clipboard" data-clipboard-target="#charcopy-character">Copy</button>
 <ul class="charcopy-quick">
   {%- for item in site.data.quick %}
-    <li class="button--outline" data-val="{{ item[0] }}" title="U+{{ item[0] }} {{ item[1].text | default: item[1] }}">
+    <li class="button--outline" data-val="{{ item[0] }}" title="U+{{ item[0] }} {{ item[1].title | default: item[1].text | default: item[1] }}">
       <span{% if item[1].ws %} class="charcopy-ws"{% endif %}>&#x{{ item[0] }};</span>
       <span class="charcopy-unicode-name">{{ item[1].text | default: item[1] }}</span>
     </li>
