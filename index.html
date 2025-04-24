@@ -62,7 +62,7 @@ title: charcopy
       font-size: 50%;
     }
 
-    .charcopy-zwj {
+    .charcopy-tv {
       display: inline-block;
       width: 27px;
       padding: 4px;
@@ -97,19 +97,26 @@ function output(val) {
 }
 
 function codePoint(val) {
-    document.getElementById('charcopy-code').innerHTML = [...val].map(function (char) {
-        var codePoint = char.codePointAt(0);
+    const chars = [...val];
+    document.getElementById('charcopy-code').innerHTML = chars.map(function (char, ix) {
+        const codePoint = char.codePointAt(0),
+            nextCodePoint = chars[ix + 1]?.codePointAt(0) || 0;
 
         if (codePoint >= 126980 || (codePoint >= 9728 && codePoint < 9983)) {
             if (codePoint == 9792 || codePoint == 9794) {
-                return '<a href="https://emojipedia.org/' + char + '/">' + char + '</a>';
+                if (nextCodePoint == 65039) { char += chars[ix + 1]; }
+                return '<a href="https://emojipedia.org/' + char + '">' + char + '</a>';
             }
 
-            return '<a href="https://emojipedia.org/' + char + '/"><img class="charcopy-emoji" alt="' + char + '" src="https://raw.githubusercontent.com/iamcal/emoji-data/master/img-apple-160/' + codePoint.toString(16) + '.png" /></a>';
+            return '<a href="https://emojipedia.org/' + char + '"><img class="charcopy-emoji" alt="' + char + '" src="https://raw.githubusercontent.com/iamcal/emoji-data/master/img-apple-160/' + codePoint.toString(16) + '.png" /></a>';
         }
 
         if (codePoint == 8205) {
-          return '<a href="https://emojipedia.org/zero-width-joiner/"><span class="charcopy-zwj">ZWJ</span></a>';
+          return '<a href="https://emojipedia.org/zero-width-joiner"><span class="charcopy-tv">ZWJ</span></a>';
+        }
+
+        if (codePoint == 65039) {
+          return '<a href="https://emojipedia.org/variation-selector-16"><span class="charcopy-tv">VS 16</span></a>';
         }
 
         return '<a href="https://www.fileformat.info/info/unicode/char/' + codePoint.toString(16) + '/index.htm">' + char + '</a>';
