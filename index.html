@@ -76,7 +76,7 @@ title: charcopy
     }
 </style>
 <form autocorrect="off" autocapitalize="off">
-    <div class="charcopy-input"><p>U+<input type="text" id="charcopy-codepoint"></p></div>
+    <div class="charcopy-input"><p>U+<input type="text" id="charcopy-codepoint" pattern="[a-fA-F\d]+"></p></div>
 </form>
 <div class="charcopy-output"><p id="charcopy-character"></p></div>
 <button class="button charcopy-clipboard" data-clipboard-target="#charcopy-character">Copy</button>
@@ -124,7 +124,7 @@ function codePoint(val) {
 }
 
 document.getElementById('charcopy-codepoint').addEventListener('keyup', function (e) {
-    output(e.target.value);
+    output(e.target.validity.valid ? e.target.value : '');
 });
 
 document.querySelector('form').addEventListener('submit', function (e) {
