@@ -51,4 +51,6 @@ document.querySelector('.charcopy-quick').addEventListener('click', function (e)
 
 (new ClipboardJS('.charcopy-clipboard')).on('success', function(e) {
     e.clearSelection();
+    e.trigger.innerText = 'Copied!';
+    setTimeout(() => e.trigger.innerText = 'Copy', 1000);
 });
